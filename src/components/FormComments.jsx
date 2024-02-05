@@ -39,7 +39,7 @@ function FormComments() {
       commentsArray[replyIndex].replies.push(reply);
       setCommentsArray([...commentsArray]);
       setReply("");
-      setReplyIndex("");
+      setReplyIndex(null);
     }
   }
 
@@ -52,7 +52,7 @@ function FormComments() {
   }
 
   const handleDoubleClick = (index,respuestaIndex, respuesta) =>{
-    setEditingIndex([index, respuestaIndex]);
+    setEditingIndex({ commentIndex: index, replyIndex: respuestaIndex });
     setEditedValue(respuesta);
   }
 
@@ -114,7 +114,7 @@ function FormComments() {
                       <span>{respuestaIndex + 1}</span>
 
 
-                          {editingIndex[0] === index &&  editingIndex[1] === respuestaIndex ? (
+                          {editingIndex.commentIndex === index &&  editingIndex.replyIndex === respuestaIndex ? (
                             <div className='editable'>
                               <textarea
                                 value={editedValue}
