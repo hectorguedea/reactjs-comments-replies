@@ -44,8 +44,11 @@ function FormComments() {
   }
 
   const handleRemoveReply = (index, replyIndex) =>{
-    commentsArray[index].replies.splice(replyIndex, 1);
-    setCommentsArray([...commentsArray]);
+    const shouldRemove = window.confirm("¿Estás seguro de que quieres borrar esta respuesta?");
+    if (shouldRemove) {
+      commentsArray[index].replies.splice(replyIndex, 1);
+      setCommentsArray([...commentsArray]);
+    }
   }
 
   const handleDoubleClick = (index,respuestaIndex, respuesta) =>{
@@ -129,7 +132,7 @@ function FormComments() {
                           className='minus-reply'
                             onClick={() => handleRemoveReply(index, respuestaIndex) }
                             >
-                              -
+                             Borrar
                             </button>
                             </>
                       )}

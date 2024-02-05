@@ -51,13 +51,19 @@
 
 .addReply{
   margin-left:10px;
-  margin-bottom:20px;
+}
+.comment-card .reply:first-child{
+  margin-top:15px;
 }
 .reply{
   margin-left:20px;
   background-color:antiquewhite;
   padding:15px;
   display: flex;
+}
+.reply div{
+  height: 100%;
+  align-self: center;
 }
 .reply span{
   border-radius: 50%;
@@ -67,12 +73,14 @@
   margin-right: 10px;
 }
 .minus-reply{
-  padding: 2px 4px;
+
   font-weight: bold;
-  border-radius: 10%;
   margin-left:10px;
-  background-color: red;
-  color:#fff;
+  font-size: 15px;
+  background-color: transparent;
+  color:red;
+  height: 100%;
+  align-items: center;
 }
 .minus-reply:hover{
   opacity:.9;
