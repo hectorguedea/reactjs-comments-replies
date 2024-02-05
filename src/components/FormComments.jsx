@@ -5,7 +5,10 @@ import '../App.css'
 function FormComments() {
   const [comment, setComment] = useState("");
   const [reply, setReply] = useState(""); 
-  const [replyIndex, setReplyIndex] = useState(""); 
+  const [editedValue, setEditedValue] = useState(""); 
+  const [replyIndex, setReplyIndex] = useState(null); 
+  const [editingIndex, setEditingIndex] = useState({ commentIndex: null, replyIndex: null });
+
 
   const [commentsArray, setCommentsArray] = useState([]); 
 
@@ -30,8 +33,9 @@ function FormComments() {
     }
   };
 
+
   const handleAddReply = () =>{
-    if (reply.trim() !== "") {
+    if (reply.trim() !== "" && replyIndex !== "") {
       commentsArray[replyIndex].replies.push(reply);
       setCommentsArray([...commentsArray]);
       setReply("");
@@ -39,6 +43,29 @@ function FormComments() {
     }
   }
 
+  const handleRemoveReply = (index, replyIndex) =>{
+    commentsArray[index].replies.splice(replyIndex, 1);
+    setCommentsArray([...commentsArray]);
+  }
+
+  const handleDoubleClick = (index,respuestaIndex, respuesta) =>{
+    setEditingIndex([index, respuestaIndex]);
+    setEditedValue(respuesta);
+  }
+
+  const handleEditChange = (event) => {
+    setEditedValue(event.target.value);
+  };
+
+  const handleEditSave = (index, replyIndex) =>{
+
+    if (editedValue !== null) {
+      commentsArray[index].replies[replyIndex] = editedValue; 
+      setCommentsArray([...commentsArray]);
+      setEditingIndex({ commentIndex: null, replyIndex: null });
+      setEditedValue("");
+    }
+  }
 
   return (
     <>
@@ -82,7 +109,32 @@ function FormComments() {
                 {commentsArray[index].replies?.map((respuesta, respuestaIndex) => (
                     <div key={respuestaIndex} className='reply'>
                       <span>{respuestaIndex + 1}</span>
-                       { respuesta } 
+
+
+                          {editingIndex[0] === index &&  editingIndex[1] === respuestaIndex ? (
+                            <div className='editable'>
+                              <textarea
+                                value={editedValue}
+                                onChange={handleEditChange}
+                              />
+                              <button onClick={() => handleEditSave(index, respuestaIndex)}>Guardar</button>
+                            </div>
+                          ) : (
+                            <>
+                          <div onDoubleClick={() => handleDoubleClick(index, respuestaIndex, respuesta)}>
+                                  { respuesta } 
+                          </div>
+
+                          <button
+                          className='minus-reply'
+                            onClick={() => handleRemoveReply(index, respuestaIndex) }
+                            >
+                              -
+                            </button>
+                            </>
+                      )}
+
+                       
                     </div>
                 ))}
 
