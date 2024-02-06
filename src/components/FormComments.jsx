@@ -24,8 +24,8 @@ function FormComments() {
    setReplyIndex(index);
   }
 
-  const handleAddComment = () => {
-
+  const handleAddComment = (event) => {
+    event.preventDefault(); 
     if (comment.trim() !== "") {
       setCommentsArray([...commentsArray, {text:comment, replies:[]}]);
       setComment("");
@@ -34,7 +34,8 @@ function FormComments() {
   };
 
 
-  const handleAddReply = () =>{
+  const handleAddReply = (event) =>{
+    event.preventDefault(); 
     if (reply.trim() !== "" && replyIndex !== "") {
       commentsArray[replyIndex].replies.push(reply);
       setCommentsArray([...commentsArray]);
@@ -69,11 +70,11 @@ function FormComments() {
       setEditedValue("");
     }
   }
-
+  
   return (
     <>
 
-    <div className='form-comment'>
+    <form className='form-comment' onSubmit={handleAddComment}>
       <textarea
           value={comment}
           onChange={handleChange}
@@ -81,11 +82,10 @@ function FormComments() {
           cols={50}
         />
         <button
-        onClick={handleAddComment}
         >
           Agregar Comentario
         </button>
-      </div>
+      </form>
 
       <div className="comment-list">
         {commentsArray.map((comentario, index) => (
@@ -94,19 +94,17 @@ function FormComments() {
              {replyIndex !== index && (<button onClick={() => handleReply(index)}  className='addReply'>Respuesta</button>)}
               {replyIndex === index && (
 
-                  <div className='form-comment'>
+                  <form className='form-comment' onSubmit={handleAddReply}>
                         <textarea
                           value={reply}
                           onChange={handleChangeReply}
                           rows={4} 
                           cols={50}
                         />
-                         <button
-                          onClick={handleAddReply}
-                          >
+                         <button>
                             Agregar Respuesta
                           </button>
-                  </div> 
+                  </form> 
               )}
 
                 {commentsArray[index].replies?.map((respuesta, respuestaIndex) => (
