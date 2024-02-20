@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import '../App.css'
 
-function FormComments({ initialComments = [], onAddComment, onAddReply, onRemoveReply, styles = {} }) {
+function FormComments({ initialComments = [], onAddComment, onAddReply, onRemoveReply,  setComments, styles = {} }) {
   const [comment, setComment] = useState("");
   const [reply, setReply] = useState("");
   const [editedValue, setEditedValue] = useState("");
@@ -57,7 +57,11 @@ function FormComments({ initialComments = [], onAddComment, onAddReply, onRemove
 
   const handleEditSave = (index, replyIndex) => {
     if (editedValue !== null) {
-      onAddReply(index, editedValue);
+      setComments((prevComments) => {
+        const updatedComments = [...prevComments];
+        updatedComments[index].replies[replyIndex] = editedValue;
+        return updatedComments;
+      });
       setEditingIndex({ commentIndex: null, replyIndex: null });
       setEditedValue("");
     }

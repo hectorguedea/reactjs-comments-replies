@@ -55,11 +55,13 @@ const handleRemoveReply = (commentIndex, replyIndex) => {
     <div className="app-container">
       <h1>Comentarios</h1>
       {/* Rendering of the FormComments component with the appropriate props */}
+
       <FormComments
         initialComments={comments}
         onAddComment={handleAddComment}
         onAddReply={handleAddReply}
         onRemoveReply={handleRemoveReply}
+        setComments={setComments} 
         styles={styles}
       />
     </div>
