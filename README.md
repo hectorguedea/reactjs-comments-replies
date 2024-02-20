@@ -9,6 +9,12 @@ Comments and Replies as a ReactJS Component.
 - Remove Reply
 - Edit Reply
 
+## Updates 
+
+- Initial Data from the simulated database (you can now fetch database and populated the comments)
+- Props functions
+- Style as props
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
