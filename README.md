@@ -9,11 +9,15 @@ Comments and Replies as a ReactJS Component.
 - Remove Reply
 - Edit Reply
 
-## Updates 
+## Updates (February 20th, 2024)
 
 - Initial Data from the simulated database (you can now fetch database and populated the comments)
 - Props functions
 - Style as props
+
+## Demo 
+
+Go to [Demo online](https://lucent-cuchufli-1c3594.netlify.app/) 
 
 ## Contributing
 
